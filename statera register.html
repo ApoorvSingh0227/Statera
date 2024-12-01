@@ -1,70 +1,69 @@
 <div class="header-container">
-  <header class="header">
-      <link rel="stylesheet" href="stateracss register.css">
-      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
-      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
-      <nav class="nav">
-          <img src="new logo 2@2x.png" class="nav-logo" alt="Logo">
-          <a class="nav-link" href="">Statera</a>
-      </nav>
-  </header>
-  <body class="background">
-      <div class="main-content">
-          <!-- Left Side: Motto Image -->
-          <div class="left-section">
-              <img src="statera motto main.png" class="motto-image" alt="Motto">
-          </div>
-
-          <!-- Right Side: Registration Form -->
-          <div class="right-section">
-              <div class="login-box">
-                  <form>
-                      <label for="first-name">First Name</label>
-                      <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
-
-                      <label for="last-name">Last Name</label>
-                      <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
-
-                      <label for="email">Email</label>
-                      <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-                      <label for="phone">Phone</label>
-                      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-
-                      <label for="hire-date">Hire Date</label>
-                      <input type="date" id="hire-date" name="hire-date" required>
-
-                      <label for="password">Password</label>
-                      <div class="password-container">
-                          <input type="password" id="password" name="password" placeholder="Enter your password" required>
-                          <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">
-                              <img src="eye.png" alt="Toggle Password Visibility" class="eye-icon">
-                          </button>
-                      </div>
-
-                      <label for="confirm-password">Confirm Password</label>
-                      <div class="password-container">
-                          <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
-                          <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">
-                              <img src="eye.png" alt="Toggle Password Visibility" class="eye-icon">
-                          </button>
-                      </div>
-
-                      <div class="buttons">
-                          <button type="submit" class="register-btn">Register</button>
-                          <a href="staterahome.html"><button type="button" class="login-btn">Log In</button></a>
-                      </div>
-                  </form>
-              </div>
-          </div>
-      </div>
-
-      <script>
-          function togglePasswordVisibility(fieldId) {
-              const passwordField = document.getElementById(fieldId);
-              const type = passwordField.type === 'password' ? 'text' : 'password';
-              passwordField.type = type;
-          }
-      </script>
-  </body>
-</div>
+    <header class="header">
+        <link rel="stylesheet" href="stateracss register.css">
+        <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+        <nav class="nav">
+            <img src="new logo 2@2x.png" class="nav-logo" alt="Logo">
+            <a class="nav-link" href="">Statera</a>
+        </nav>
+    </header>
+    <body class="background">
+        <div class="main-content">
+            <!-- Left Side: Motto Image -->
+            <div class="left-section">
+                <img src="statera motto main.png" class="motto-image" alt="Motto">
+            </div>
+  
+            <!-- Right Side: Registration Form -->
+            <div class="right-section">
+                <div class="login-box">
+                    <form action="statera taskmain.html" method="POST">
+                        <label for="first-name">First Name</label>
+                        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" required>
+  
+                        <label for="last-name">Last Name</label>
+                        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" required>
+  
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+  
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+  
+                        <label for="hire-date">Hire Date</label>
+                        <input type="date" id="hire-date" name="hire-date" required>
+  
+                        <label for="password">Password</label>
+                        <div class="password-container">
+                            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password')">
+                                <img src="eye.png" alt="Toggle Password Visibility" class="eye-icon">
+                            </button>
+                        </div>
+  
+                        <label for="confirm-password">Confirm Password</label>
+                        <div class="password-container">
+                            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm your password" required>
+                            <button type="button" class="toggle-password" onclick="togglePasswordVisibility('confirm-password')">
+                                <img src="eye.png" alt="Toggle Password Visibility" class="eye-icon">
+                            </button>
+                        </div>
+  
+                        <div class="buttons">
+                            <button type="submit" class="register-btn">Register</button>
+                            <a href="staterahome.html"><button type="button" class="login-btn">Log In</button></a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+  
+        <script>
+            function togglePasswordVisibility(fieldId) {
+                const passwordField = document.getElementById(fieldId);
+                const type = passwordField.type === 'password' ? 'text' : 'password';
+                passwordField.type = type;
+            }
+        </script>
+    </body>
+  </div>
