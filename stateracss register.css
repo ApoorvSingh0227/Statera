@@ -1,0 +1,253 @@
+
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow: scroll;
+}
+
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    z-index: 10;
+    background-color: rgba(61, 61, 61, 0.9); /* Semi-transparent background for header */
+    border-radius: 10px;
+}
+
+.background{
+    background-image: url("statera\ bg.png");
+    background-color: #EAEAE8;
+    background-size: cover; /* Full width and height proportional scaling */
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.header-container {
+    position: sticky;
+    
+  }
+
+/* Navigation styles */
+.nav {
+    display: flex;
+    align-items: flex-end; /* Align navigation links at the bottom */
+}
+
+.nav-logo {
+    display: block; 
+    height: 35px;
+    width: 35px;
+    padding-left: 5%;
+    padding-bottom: 12%;
+  }
+
+.nav-link {
+    font-family: scale-variable, sans-serif;
+    font-variation-settings: "wdth" 100, "wght" 400;
+    text-decoration: none; /* Remove underline */
+    font-size: 24px; /* Adjust font size */
+    color: #ffffff; /* Adjust link color */
+    padding: 20px 20px;
+    padding-left: 5px;
+}
+
+.nav-link:hover {
+    color: #dcdcdc; /* Add hover effect */
+}
+
+/* Logo styles */
+.logo {
+    width: 320px; /* Adjust logo size */
+    height: 50px; /* Keep logo proportional */
+    position: absolute;
+    left: 38%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom; /* Align logo with text bottom */
+}
+
+/* Main Content Layout */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 40px;
+    width: 80%;
+    margin: auto;
+    gap: 20px;
+  }
+  
+  /* Left Section */
+  .left-section {
+    flex: 1;
+  }
+  
+  .motto-image {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Right Section: Login Box */
+  .right-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login-box {
+    background-color: #CFCECC;
+    border-radius: 15px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .login-box label {
+    display: block;
+    font-family: new-science, sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #3d3d3d;
+  }
+  
+
+  
+  .login-box input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: none; /* Remove the border */
+    background-color: #EAEAE8; /* Set background color */
+    border-radius: 5px;
+    font-family: new-science, sans-serif;
+    font-size: 14px;
+    color: #3d3d3d; /* Optional: Adjust text color */
+}
+
+
+  
+  .password-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .password-container input {
+    width: 100%; /* Ensure consistent width */
+    padding: 10px;
+    border: none; /* Remove border */
+    background-color: #EAEAE8; /* Match the email input */
+    border-radius: 5px;
+    font-family: new-science, sans-serif;
+    font-size: 14px;
+    color: #3d3d3d; /* Optional: Adjust text color */
+}
+  
+  .toggle-password {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: new-science, sans-serif;
+    font-size: 16px;
+    margin-left: 10px;
+  }
+  
+  /* Buttons */
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+  }
+  
+  .register-btn {
+    background-color: #EAEAE8;
+    color: #3d3d3d;
+    font-family: new-science, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .register-btn:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .login-btn {
+    background-color: #3d3d3d;
+    border: none;
+    font-family: new-science, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #EAEAE8;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .login-btn:hover {
+    background-color: #2c2c2c;
+  }
+
+  .eye-icon {
+    width: 30px; /* Adjust the width to match the size of the original emoji */
+    height: 30px; /* Adjust height proportionally */
+    margin-bottom: 30%;
+    object-fit: contain; /* Ensures the image scales correctly */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.register-btn {
+  background-color: #3d3d3d;
+  color: #ffffff;
+  font-family: new-science, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+
+.register-btn:hover {
+  background-color: #2c2c2c;
+}
+
+.login-btn {
+  background-color: transparent;
+  color: #3d3d3d;
+  font-family: new-science, sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 2px solid #3d3d3d;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-btn:hover {
+  background-color: #f0f0f0;
+}
+
+
+
