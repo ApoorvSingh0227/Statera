@@ -16,7 +16,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     z-index: 10;
-    background-color: rgba(61, 61, 61, 0.9); /* Semi-transparent background for header */
+    background-color: #3D3D3D; /* Semi-transparent background for header */
     border-radius: 10px;
 }
 

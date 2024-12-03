@@ -16,7 +16,7 @@ body {
     margin-left: 10px;
     margin-right: 10px;
     z-index: 10;
-    background-color: rgba(61, 61, 61, 0.9); /* Semi-transparent background for header */
+    background-color: #3D3D3D; /* Semi-transparent background for header */
     border-radius: 10px;
 }
 
@@ -69,8 +69,8 @@ body {
 }
 
 .content {
-    max-width: fit-content;
-    margin: 20px auto;
+    width: 100%;
+    margin: 20px 0;
     padding: 20px;
   }
   
@@ -79,15 +79,16 @@ body {
     font-variation-settings: "wdth" 100, "wght" 500;
     font-size: 2rem;
     margin-bottom: 10px;
-    color: #333;
+    color: #3D3D3D;
   }
   
   .project-name {
     font-family: scale-variable, sans-serif;
     font-variation-settings: "wdth" 100, "wght" 400;
     font-size: 1.5rem;
+    text-decoration: none;
     margin-bottom: 20px;
-    color: #555;
+    color: #3D3D3D;
   }
   
   .description {
@@ -96,8 +97,9 @@ body {
     font-style: normal;
     font-size: 1rem;
     line-height: 1.6;
-    color: #666;
+    color: #3D3D3D;
     margin-bottom: 20px;
+    margin-right: 5%;
   }
   
   .task-details {
@@ -105,12 +107,13 @@ body {
     font-weight: 400;
     font-style: normal;
     font-size: 1rem;
-    color: #444;
+    color: #3D3D3D;
   }
   
   .progress-bar-container {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     margin-top: 10px;
   }
   
@@ -120,15 +123,18 @@ body {
     background-color: #ddd;
     border-radius: 5px;
     overflow: hidden;
-    margin-right: 10px;
+    margin-right: 1%;
   }
   
   .progress {
     height: 100%;
-    background-color: #4caf50;
+    background-color: #FFCE76;
   }
   
   .progress-ratio {
     font-size: 0.9rem;
+    white-space: normal;
     color: #333;
+    margin-right: 5%;
+    text-align: right;
   }
