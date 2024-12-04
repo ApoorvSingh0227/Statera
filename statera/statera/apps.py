@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class StatappConfig(AppConfig):
+class StateraConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'statapp'
+    name = 'statera'
