@@ -7,6 +7,7 @@ body {
     font-family: new-science, sans-serif;
     font-weight: 600;
     font-style: normal;
+    color: #3D3D3D;
 }
 
 
@@ -32,9 +33,7 @@ body {
     
   }
 
-.main-content {
-    color: #3D3D3D;
-}
+
 
 /* Navigation styles */
 .nav {
@@ -75,6 +74,10 @@ body {
     background-position: center bottom; /* Align logo with text bottom */
 }
 
+.tasks-table {
+    color: #3D3D3D;
+}
+
 .tasks-table table {
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -88,7 +91,6 @@ body {
 .right-panel {
     width: 25%;
     padding: 10px;
-    background: #f7f7f7;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -111,7 +113,7 @@ body {
     margin: 10px;
     padding: 15px;
     width: 80%;
-    background: #F48787;
+    background: #e46262;
     color: white;
     border: none;
     border-radius: 5px;
@@ -120,7 +122,7 @@ body {
 }
 
 .add-button:hover {
-    background-color: #d46a6a;
+    background-color: #dd3333;
 }
 
 .progress-bar {
@@ -132,4 +134,8 @@ body {
 
 .bar {
     height: 100%;
+}
+
+.linked:hover {
+    color: #000000;
 }

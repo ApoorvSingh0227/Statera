@@ -151,7 +151,7 @@ def task_info(request, task_id):
         with connection.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT t.taskName, p.projectName
+                SELECT t.taskName, p.projectName, p.projectID
                 FROM Task t
                 JOIN Project p ON t.projectID = p.projectID
                 WHERE t.taskID = %s
@@ -161,11 +161,14 @@ def task_info(request, task_id):
             if task:
                 task_name = task[0]  # First column: taskName
                 project_name = task[1]  # Second column: projectName
+                project_id = task[2]  # Project ID
             else:
                 task_name = "-"
                 project_name = "-"
+                project_id = None
     except Exception as e:
         task_name = "Error fetching task details"
         project_name = "Error fetching project details"
+        project_id = None
 
-    return render(request, 'statera task info.html', {'task_id': task_id, 'task_name':task_name, 'project_name': project_name})
+    return render(request, 'statera task info.html', {'task_id': task_id, 'task_name':task_name, 'project_name': project_name ,'project_id': project_id})
