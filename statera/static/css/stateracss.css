@@ -21,7 +21,7 @@ body {
 }
 
 .background{
-  background-image: url("../images/statera bg.png");
+  background-image: url("/static/images/statera bg.png");
     background-color: #EAEAE8;
     background-size: cover; /* Full width and height proportional scaling */
     background-position: center;

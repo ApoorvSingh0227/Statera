@@ -1,0 +1,12 @@
+INSERT INTO Employee (employeeID, firstName, lastName, email, phone, hireDate, departmentID, position, salary, reportsTo, password)
+VALUES
+(1, 'John', 'Doe', 'john.doe@example.com', '1234567890', '2023-01-15', 1, 'Manager', 80000.00, NULL, '$2b$12$eXampplePasswordHash'),
+(2, 'Jane', 'Smith', 'jane.smith@example.com', '1234567891', '2023-02-10', 2, 'Developer', 70000.00, 1, '$2b$12$eXampplePasswordHash'),
+(3, 'Sam', 'Brown', 'sam.brown@example.com', '1234567892', '2023-03-20', 1, 'Designer', 65000.00, 1, '$2b$12$eXampplePasswordHash'),
+(4, 'Lisa', 'White', 'lisa.white@example.com', '1234567893', '2023-04-25', 2, 'Tester', 60000.00, 2, '$2b$12$eXampplePasswordHash'),
+(5, 'Mike', 'Taylor', 'mike.taylor@example.com', '1234567894', '2023-05-30', 3, 'HR Specialist', 55000.00, NULL, '$2b$12$eXampplePasswordHash'),
+(6, 'Emily', 'Davis', 'emily.davis@example.com', '1234567895', '2023-06-15', 1, 'Developer', 75000.00, 2, '$2b$12$eXampplePasswordHash'),
+(7, 'Chris', 'Wilson', 'chris.wilson@example.com', '1234567896', '2023-07-20', 3, 'Manager', 85000.00, NULL, '$2b$12$eXampplePasswordHash'),
+(8, 'Sophia', 'Moore', 'sophia.moore@example.com', '1234567897', '2023-08-10', 2, 'Tester', 62000.00, 4, '$2b$12$eXampplePasswordHash'),
+(9, 'Daniel', 'Clark', 'daniel.clark@example.com', '1234567898', '2023-09-05', 1, 'Designer', 70000.00, 3, '$2b$12$eXampplePasswordHash'),
+(10, 'Olivia', 'Martin', 'olivia.martin@example.com', '1234567899', '2023-10-01', 3, 'HR Specialist', 57000.00, 5, '$2b$12$eXampplePasswordHash');

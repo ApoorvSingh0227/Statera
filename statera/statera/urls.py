@@ -21,7 +21,13 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('employees/', include('statera.home_url')),  # Example sub-URL
-    path('time_entries/', include('statera.home_url')),  # Example sub-URL
-    path('', include('statera.home_url')),  # Add this for the root URL
+    path('', include('statera.urls')),  # Include app-level URLs
+]
+
+urlpatterns = [
+    path('', views.login, name='login'),                 # Login page (home.html)
+    path('register/', views.register, name='register'),  # Register page
+    path('dashboard/', views.dashboard, name='dashboard'),  # Dashboard page
+    path('task-info/<int:task_id>/', views.task_info, name='task_info'),
+    path('project-main/<int:project_id>/', views.project_main, name='project_main'),
 ]

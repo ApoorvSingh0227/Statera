@@ -1,0 +1,103 @@
+{% load static %}
+<div class="header-container">
+    <header class="header">
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="css/stateracss dashboard.css">
+      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+      <nav class="nav">
+        <img src="{% static 'images/new logo 2@2x.png' %}" alt="Logo" class="nav-logo">
+        <a class="nav-link" href="{% url 'dashboard' %}"><link rel="stylesheet" href="{% static 'css/stateracss dashboard.css' %}">Statera</a>
+      </nav>
+    </header>
+    <body class="background">
+
+      <!-- Main Content -->
+    <div class="main-content" style="display: flex; height: 100vh;">
+
+      <!-- Left: Tasks Table -->
+      <div class="tasks-table" style="width: 75%; padding: 20px;">
+          <table style="width: 100%; border-collapse: collapse;">
+              <thead>
+                  <tr style="background-color: #f0f0f0;">
+                      <th style="text-align: left; padding: 10px;">Task Name</th>
+                      <th style="text-align: left; padding: 10px;">Project Name</th>
+                      <th style="text-align: left; padding: 10px;">Status</th>
+                      <th style="text-align: left; padding: 10px;">Priority</th>
+                      <th style="text-align: left; padding: 10px;">Progress</th>
+                      <th style="text-align: left; padding: 10px;">Due Date</th>
+                  </tr>
+              </thead>
+              <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <!-- Task Name -->
+                    <td style="padding: 10px;">
+                        <a href="{% url 'task_info' task.0 %}" style="text-decoration: none; color: inherit;">
+                            {{ task.1 }}
+                        </a>
+                    </td>
+            
+                    <!-- Project Name -->
+                    <td style="padding: 10px;">
+                        {% if task.2 %}
+                            <a href="{% url 'project_main' task.2 %}" style="text-decoration: none; color: inherit;">
+                                {{ task.3 }}
+                            </a>
+                        {% else %}
+                            {{ task.3 }}
+                        {% endif %}
+                    </td>
+            
+                    <!-- Status -->
+                    <td style="padding: 10px;">{{ task.4 }}</td>
+            
+                    <!-- Priority -->
+                    <td style="margin-top: 18px; padding: 2px 10px; color: #fff; border-radius: 5px; display: inline-block;
+                        {% if task.5 == 'High' %}background-color: #f55858;
+                        {% elif task.5 == 'Medium' %}background-color: #f8ba4c;
+                        {% elif task.5 == 'Low' %}background-color: #17ba6c;
+                        {% endif %}">
+                        {{ task.5 }}
+                    </td>
+            
+                    <!-- Progress -->
+                    <td style="padding: 10px;">
+                        <div class="progress-bar">
+                            <div class="bar" 
+                                style="width:{{ task.7|floatformat:0 }}%; 
+                                {% if task.7 <= 25 %}
+                                    background-color: #F48787;
+                                {% elif task.7 > 25 and task.7 <= 75 %}
+                                    background-color: #FFCE76;
+                                {% elif task.7 > 75 and task.7 < 100 %}
+                                    background-color: #e0ff76;
+                                {% else %}
+                                    background-color: #2dc77d;
+                                {% endif %}">
+                            </div>
+                        </div>
+                    </td>
+            
+                    <!-- Due Date -->
+                    <td style="padding: 10px;">{{ task.8 }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" style="padding: 10px; text-align: center;">No tasks assigned</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+          </table>
+      </div>
+
+      <!-- Right: Panel -->
+      <div class="right-panel">
+          <button class="add-button">New Task</button>
+          <button class="add-button">Time Entry</button>
+      </div>
+  </div>
+    </body>
+  </div>
+  
+  

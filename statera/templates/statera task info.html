@@ -1,18 +1,18 @@
 {% load static %}
 <div class="header-container">
     <header class="header">
-      <link rel="stylesheet" href="stateracss task info.css">
+      <link rel="stylesheet" href="{% static 'css/stateracss task info.css' %}">
       <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
       <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
       <nav class="nav">
-        <img src="new logo 2@2x.png" class="nav-logo" alt="Logo">
-        <a class="nav-link" href="statera taskmain.html">Statera</a>
+        <img src="{% static 'images/new logo 2@2x.png' %}" class="nav-logo" alt="Logo">
+        <a class="nav-link" href="{% url 'dashboard' %}">Statera</a>
       </nav>
     </header>
     <body class="background">
       <div class="content">
-        <div class="task-name">Task Name</div>
-        <a class="project-name" href="statera projectmain.html">Project Name</a>
+        <div class="task-name">{{ task_name }}</div>
+        <a class="project-name" href="statera projectmain.html">{{ project_name }}</a>
         <p class="description">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </p>
