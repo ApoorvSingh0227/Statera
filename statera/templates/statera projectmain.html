@@ -22,7 +22,7 @@
                   <p><strong>Due Date: </strong>{{ due_date }}</p>
                   <div class="progress-bar-container">
                       <div class="progress-bar">
-                          <div class="progress" style="width: {{ progress|floatformat:0 }};"></div>
+                          <div class="progress" style="width: {{ progress|floatformat:0 }}%;"></div>
                       </div>
                       <span class="progress-ratio">{{actual_hours|floatformat:0}}/{{estimated_hours|floatformat:0}} hrs</span>
                   </div>
@@ -60,18 +60,18 @@
 
           <div class="participant-item">
             {% for participant in participants %}
-            <div>{{ participant.0 }}</div>
+            <a style="text-decoration: none; color: inherit;" href="{% url 'employee_info' participant.6 %}">{{ participant.0 }}</a>
             <div>{{ participant.5 }}</div>
-            <div>{{ participant.1 }}</div>
+            <a style="text-decoration: none; color: inherit;" href="{% url 'task_info' participant.5 %}">{{ participant.1 }}</a>
             <div>
                 <div class="progress-bar">
                     <div class="progress" 
-                                style="width:{{ participant.6|floatformat:0 }}%; 
-                                {% if participant.6 <= 25 %}
+                                style="width:{{ participant.7|floatformat:0 }}%; 
+                                {% if participant.7 <= 25 %}
                                     background-color: #F48787;
-                                {% elif participant.6 > 25 and participant.6 <= 75 %}
+                                {% elif participant.7 > 25 and participant.6 <= 75 %}
                                     background-color: #FFCE76;
-                                {% elif participant.6 > 75 and participant.6 < 100 %}
+                                {% elif participant.7 > 75 and participant.7 < 100 %}
                                     background-color: #e0ff76;
                                 {% else %}
                                     background-color: #2dc77d;

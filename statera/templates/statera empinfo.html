@@ -1,0 +1,46 @@
+{% load static %}
+<div class="header-container">
+    <header class="header">
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="css/stateracss dashboard.css">
+        <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+        <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+        <nav class="nav">
+          <img src="{% static 'images/new logo 2@2x.png' %}" alt="Logo" class="nav-logo">
+          <a class="nav-link" href="{% url 'dashboard' %}"><link rel="stylesheet" href="{% static 'css/stateracss dashboard.css' %}">Statera</a>
+        </nav>
+    </header>
+    <body class="background">
+        <div class="main-content" style="padding: 20px; display: flex; gap: 20px; flex-wrap: wrap;">
+
+            <!-- Personal Information Section -->
+            <section class="info-section" style="width: 45%; padding: 20px; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h2 style="font-family: new-science, sans-serif; font-weight: 600; color: #3D3D3D;">Personal Information</h2>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Full Name:</strong> <span id="full-name" style="color: #666;">Apoorv Singh</span>
+                </div>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Email:</strong> <span id="email" style="color: #666;">apoorvsingh@example.com</span>
+                </div>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Phone Number:</strong> <span id="phone" style="color: #666;">123-456-7890</span>
+                </div>
+            </section>
+
+            <!-- Employee Profile Section -->
+            <section class="info-section" style="width: 45%; padding: 20px; background: #ffffff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+                <h2 style="font-family: new-science, sans-serif; font-weight: 600; color: #3D3D3D;">Employee Profile</h2>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Department:</strong> <span id="department" style="color: #666;">Software Development</span>
+                </div>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Position:</strong> <span id="position" style="color: #666;">Senior Developer</span>
+                </div>
+                <div class="info-item" style="margin-bottom: 10px;">
+                    <strong style="color: #3D3D3D;">Hire Date:</strong> <span id="hire-date" style="color: #666;">2020-05-15</span>
+                </div>
+            </section>
+
+        </div>
+    </body>
+</div>

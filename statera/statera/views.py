@@ -193,7 +193,8 @@ def project_main(request, project_id):
                     t.dueDate,
                     SUM(t.actualHours) AS actualHours,
                     t.estimatedHours,
-                    t.taskID
+                    t.taskID,
+                    e.employeeID
                 FROM Task t
                 JOIN Employee e ON t.assignedTo = e.employeeID
                 WHERE t.projectID = %s
@@ -292,3 +293,63 @@ def task_info(request, task_id):
         'actual_hours': actual_hours,
         'estimated_hours': estimated_hours,
         })
+
+def employee_info(request, employee_id):
+    if 'employee_id' not in request.session:
+        return redirect('login')
+
+    employee_id = request.session['employee_id']
+
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT 
+                    e.firstName,
+                    e.lastName,
+                    e.email,
+                    e.phone,
+                    e.hireDate,
+                    d.departmentName,
+                    e.position
+                FROM Employee e
+                LEFT JOIN Department d ON e.departmentID = d.departmentID
+                WHERE e.employeeID = %s
+                """,
+                [employee_id]
+            )
+            employee = cursor.fetchone()
+
+        if employee:
+            full_name = f"{employee[0]} {employee[1]}"
+            email = employee[2]
+            phone = employee[3]
+            hire_date = employee[4]
+            department = employee[5] if employee[5] else "Unassigned"
+            position = employee[6] if employee[6] else "Not specified"
+        else:
+            full_name = "N/A"
+            email = "N/A"
+            phone = "N/A"
+            hire_date = "N/A"
+            department = "N/A"
+            position = "N/A"
+
+    except Exception as e:
+        full_name = "Error fetching data"
+        email = "-"
+        phone = "-"
+        hire_date = "-"
+        department = "-"
+        position = "-"
+        print(f"Error: {e}")
+
+    return render(request, 'statera empinfo.html', {
+        'full_name': full_name,
+        'email': email,
+        'phone': phone,
+        'hire_date': hire_date,
+        'department': department,
+        'position': position
+    })
+

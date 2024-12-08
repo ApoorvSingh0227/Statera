@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: new-science, sans-serif;
+    background-color: #EAEAE8;
+    overflow-x: hidden;
+}
+
+.header-container {
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-family: new-science, sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-item {
+    font-size: 1rem;
+    color: #3D3D3D;
+}
+
+.info-item strong {
+    font-weight: 600;
+}
+
+span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #666;
+}

@@ -20,7 +20,7 @@
           <p><strong>Due Date: </strong>{{due_date}}</p>
           <div class="progress-bar-container">
             <div class="progress-bar">
-              <div class="progress" style="width: {{ progress|floatformat:0 }};"></div>
+              <div class="progress" style="width: {{ progress|floatformat:0 }}%;"></div>
             </div>
             <span class="progress-ratio">{{actual_hours|floatformat:0}}/{{estimated_hours|floatformat:0}} hrs</span>
           </div>
