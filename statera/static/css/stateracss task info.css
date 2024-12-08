@@ -32,7 +32,6 @@ body {
   position: sticky;
 }
 
-/* Navigation styles */
 .nav {
   display: flex;
   align-items: flex-end; /* Align navigation links at the bottom */

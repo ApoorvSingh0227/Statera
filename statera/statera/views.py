@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.contrib.auth.hashers import make_password
 from django.db import connection
 from django.contrib.auth.hashers import check_password
+from django.urls import reverse
+from datetime import date
 
 from .models import Employee, Department, Project, Task
 
@@ -294,11 +296,128 @@ def task_info(request, task_id):
         'estimated_hours': estimated_hours,
         })
 
-def employee_info(request, employee_id):
+def update_information(request):
     if 'employee_id' not in request.session:
         return redirect('login')
 
     employee_id = request.session['employee_id']
+
+    if request.method == "POST":
+        selected_skills = request.POST.getlist('skills', [])
+        first_name = request.POST.get('first_name', '').strip()
+        last_name = request.POST.get('last_name', '').strip()
+        email = request.POST.get('email', '').strip()
+        phone = request.POST.get('phone', '').strip()
+        position = request.POST.get('position', '').strip()
+        hire_date = request.POST.get('hire_date', '').strip()
+        department = request.POST.get('department', '').strip()
+
+        try:
+            with connection.cursor() as cursor:
+                # Remove old skills
+                cursor.execute(
+                    """
+                    DELETE FROM EmployeeSkills
+                    WHERE employeeID = %s
+                    """,
+                    [employee_id]
+                )
+                # Add new skills
+                for skill_id in selected_skills:
+                    cursor.execute(
+                        """
+                        INSERT INTO EmployeeSkills (employeeID, skillID)
+                        VALUES (%s, %s)
+                        """,
+                        [employee_id, skill_id]
+                )
+        except Exception as e:
+            messages.error(request, f"Error updating skills: {e}")
+            
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    UPDATE Employee
+                    SET firstName = %s, lastName = %s, email = %s, phone = %s,
+                        position = %s, hireDate = %s, departmentID = (
+                            SELECT departmentID FROM Department WHERE departmentName = %s
+                        )
+                    WHERE employeeID = %s
+                    """,
+                    [first_name, last_name, email, phone, position, hire_date, department, employee_id]
+                )
+            messages.success(request, "Information updated successfully!")
+            return redirect('employee_info', employee_id=employee_id)
+        except Exception as e:
+            messages.error(request, f"Error updating information: {e}")
+            return redirect('update-information')
+
+    # Fetch current employee info
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT 
+                    e.firstName, e.lastName, e.email, e.phone, e.hireDate, e.position, d.departmentName
+                FROM Employee e
+                LEFT JOIN Department d ON e.departmentID = d.departmentID
+                WHERE e.employeeID = %s
+                """,
+                [employee_id]
+            )
+            employee = cursor.fetchone()
+
+            cursor.execute("SELECT departmentName FROM Department")
+            departments = [row[0] for row in cursor.fetchall()]
+
+            if not employee:
+                messages.error(request, "Employee record not found.")
+                return redirect('dashboard')
+
+            cursor.execute(
+                """
+                SELECT 
+                    s.skillID, s.skillName
+                FROM Skill s
+                JOIN EmployeeSkills es ON s.skillID = es.skillID
+                WHERE es.employeeID = %s
+                """,
+                [employee_id]
+            )
+            employee_skills = [row for row in cursor.fetchall()]
+
+            cursor.execute("SELECT skillID, skillName FROM Skill")
+            all_skills = [row for row in cursor.fetchall()]
+        
+        if employee:
+            context = {
+                'first_name': employee[0],
+                'last_name': employee[1],
+                'email': employee[2],
+                'phone': employee[3],
+                'hire_date': employee[4],
+                'position': employee[5],
+                'department': employee[6] if employee[6] else "Unassigned",
+                'employee_skills': employee_skills,
+                'skills': all_skills,
+                'departments': departments,
+            }
+        else:
+            messages.error(request, "Employee not found.")
+            return redirect('dashboard')
+
+    except Exception as e:
+        messages.error(request, f"Error fetching information: {e}")
+        return redirect('dashboard')
+
+    return render(request, 'statera updateinfo.html', context)
+
+def employee_info(request, employee_id):
+    if 'employee_id' not in request.session:
+        return redirect('login')
+
+    session_employee_id = request.session['employee_id']  # Current logged-in user's ID
+    is_own_profile = session_employee_id == employee_id
 
     try:
         with connection.cursor() as cursor:
@@ -319,6 +438,18 @@ def employee_info(request, employee_id):
                 [employee_id]
             )
             employee = cursor.fetchone()
+  
+            cursor.execute(  
+                """  
+                SELECT 
+                    s.skillName  
+                FROM EmployeeSkills es  
+                JOIN Skill s ON es.skillID = s.skillID  
+                WHERE es.employeeID = %s  
+                """,  
+                [employee_id]  
+            )  
+            skills = [row[0] for row in cursor.fetchall()]  
 
         if employee:
             full_name = f"{employee[0]} {employee[1]}"
@@ -334,6 +465,7 @@ def employee_info(request, employee_id):
             hire_date = "N/A"
             department = "N/A"
             position = "N/A"
+            skills = []
 
     except Exception as e:
         full_name = "Error fetching data"
@@ -342,14 +474,19 @@ def employee_info(request, employee_id):
         hire_date = "-"
         department = "-"
         position = "-"
+        skills = []
         print(f"Error: {e}")
-
+        
     return render(request, 'statera empinfo.html', {
         'full_name': full_name,
         'email': email,
         'phone': phone,
         'hire_date': hire_date,
         'department': department,
-        'position': position
+        'position': position,
+        'skills': skills,
+        'is_own_profile': is_own_profile,
+        'employee_id': employee_id,
     })
-
+    
+    

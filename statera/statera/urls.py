@@ -31,4 +31,6 @@ urlpatterns = [
     path('task-info/<int:task_id>/', views.task_info, name='task_info'),
     path('project-main/<int:project_id>/', views.project_main, name='project_main'),
     path('employee-info/<int:employee_id>/', views.employee_info, name='employee_info'),
+    path('update-information/', views.update_information, name='update_information'),
+
 ]

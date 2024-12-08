@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<div class="header-container">
+    <header class="header">
+      <meta charset="UTF-8">
+      <link rel="stylesheet" href="{% static 'css/stateracss updateinfo.css' %}">
+      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+      <link rel="stylesheet" href="https://use.typekit.net/yvb6gjg.css">
+      <nav class="nav">
+        <img src="{% static 'images/new logo 2@2x.png' %}" alt="Logo" class="nav-logo">
+        <a class="nav-link" href="{% url 'dashboard' %}"><link rel="stylesheet" href="{% static 'css/stateracss dashboard.css' %}">Statera</a>
+      </nav>
+    </header>
+<body>
+    <div class="container">
+        <h1 style="
+        margin: 20px; ">Update Information</h1>
+    <div class="sections">
+        <div class="section">
+            <h2>Personal Information</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="first-name">First Name</label>
+                    <input class="entry" type="text" id="first-name" value="{{ first_name }}">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Last Name</label>
+                    <input class="entry" type="text" id="last-name" value="{{ last_name }}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="email">E-mail Address</label>
+                <input class="entry" type="email" id="email" value="{{ email }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input class="entry" type="tel" id="phone" value="{{ phone }}">
+            </div>
+            <div class="form-group">
+                <label for="skills">Skills</label>
+                <select name="skills" multiple>
+                    {% for skill_id, skill_name in skills %}
+                      <option class="entry" value="{{ skill_id }}" {% if skill_id in employee_skills %}selected{% endif %}>
+                        {{ skill_name }}
+                      </option>
+                    {% endfor %}
+                </select>
+                <div class="skills-container" id="selected-skills">
+                    <!-- Selected skills will appear here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Employee Profile Section -->
+        <div class="section">
+            <h2>Employee Profile</h2>
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select name="department">
+                    {% for department in departments %}
+                      <option value="{{ department }}" {% if department == context.department %}selected{% endif %}>
+                        {{ department }}
+                      </option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="position">Position</label>
+                <input class="entry" type="text" id="position" value="{{ position }}">
+            </div>
+            <div class="form-group">
+                <label for="hire-date">Hire Date</label>
+                <input class="entry" type="date" id="hire-date" value="{{ hire_date|date:'Y-m-d' }}">
+            </div>
+        </div>
+    </div>
+        <button class="submit-btn">Confirm Changes</button>
+    </div>
+
+    <script>
+        const skillsDropdown = document.getElementById('skills');
+        const selectedSkillsContainer = document.getElementById('selected-skills');
+
+        skillsDropdown.addEventListener('change', () => {
+            const selectedOptions = Array.from(skillsDropdown.selectedOptions);
+            selectedSkillsContainer.innerHTML = '';
+            selectedOptions.forEach(option => {
+                const skillItem = document.createElement('div');
+                skillItem.className = 'skill-item';
+                skillItem.innerHTML = `
+                    ${option.text}
+                    <span class="remove-skill" data-value="${option.value}">&times;</span>
+                `;
+                selectedSkillsContainer.appendChild(skillItem);
+            });
+        });
+
+        selectedSkillsContainer.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-skill')) {
+                const valueToRemove = e.target.getAttribute('data-value');
+                Array.from(skillsDropdown.options).forEach(option => {
+                    if (option.value === valueToRemove) {
+                        option.selected = false;
+                    }
+                });
+                e.target.parentElement.remove();
+            }
+        });
+    </script>
+</body>
+</html>
