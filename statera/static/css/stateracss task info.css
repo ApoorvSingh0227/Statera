@@ -1,140 +1,143 @@
 
 
 body {
-    margin: 0;
-    padding: 0;
-    overflow: scroll;
+  margin: 0;
+  padding: 0;
+  overflow: scroll;
+  font-family: new-science, sans-serif;
+  font-weight: 600;
+  font-style: normal;
+  color: #3D3D3D;
 }
 
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    z-index: 10;
-    background-color: #3D3D3D; /* Semi-transparent background for header */
-    border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  z-index: 10;
+  background-color: #3D3D3D; /* Semi-transparent background for header */
+  border-radius: 10px;
 }
 
 .background{
-    background-color: #EAEAE8;
+  background-color: #EAEAE8;
 }
 
 .header-container {
-    position: sticky;
-    
-  }
+  position: sticky;
+}
 
 /* Navigation styles */
 .nav {
-    display: flex;
-    align-items: flex-end; /* Align navigation links at the bottom */
+  display: flex;
+  align-items: flex-end; /* Align navigation links at the bottom */
 }
 
 .nav-logo {
-    display: block; 
-    height: 35px;
-    width: 35px;
-    padding-left: 5%;
-    padding-bottom: 12%;
-  }
+  display: block; 
+  height: 35px;
+  width: 35px;
+  padding-left: 5%;
+  padding-bottom: 12%;
+}
 
 .nav-link {
-    font-family: scale-variable, sans-serif;
-    font-variation-settings: "wdth" 100, "wght" 400;
-    text-decoration: none; /* Remove underline */
-    font-size: 24px; /* Adjust font size */
-    color: #ffffff; /* Adjust link color */
-    padding: 20px 20px;
-    padding-left: 5px;
+  font-family: scale-variable, sans-serif;
+  font-variation-settings: "wdth" 100, "wght" 400;
+  text-decoration: none; /* Remove underline */
+  font-size: 30px !important; /* Adjust font size */
+  color: #ffffff; /* Adjust link color */
+  padding: 18px 15px;
+  padding-left: 5px;
 }
 
 .nav-link:hover {
-    color: #dcdcdc; /* Add hover effect */
+  color: #dcdcdc; /* Add hover effect */
 }
 
 /* Logo styles */
 .logo {
-    width: 320px; /* Adjust logo size */
-    height: 50px; /* Keep logo proportional */
-    position: absolute;
-    left: 38%;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center bottom; /* Align logo with text bottom */
+  width: 320px; /* Adjust logo size */
+  height: 50px; /* Keep logo proportional */
+  position: absolute;
+  left: 38%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom; /* Align logo with text bottom */
 }
 
 .content {
-    width: 100%;
-    margin: 20px 0;
-    padding: 20px;
-  }
-  
-  .task-name {
-    font-family: scale-variable, sans-serif;
-    font-variation-settings: "wdth" 100, "wght" 500;
-    font-size: 2rem;
-    margin-bottom: 10px;
-    color: #3D3D3D;
-  }
-  
-  .project-name {
-    font-family: scale-variable, sans-serif;
-    font-variation-settings: "wdth" 100, "wght" 400;
-    font-size: 1.5rem;
-    text-decoration: none;
-    margin-bottom: 20px;
-    color: #3D3D3D;
-  }
-  
-  .description {
-    font-family: new-science, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #3D3D3D;
-    margin-bottom: 20px;
-    margin-right: 5%;
-  }
-  
-  .task-details {
-    font-family: new-science, sans-serif;
-    font-weight: 400;
-    font-style: normal;
-    font-size: 1rem;
-    color: #3D3D3D;
-  }
-  
-  .progress-bar-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 10px;
-  }
-  
-  .progress-bar {
-    flex: 1;
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-right: 1%;
-  }
-  
-  .progress {
-    height: 100%;
-    background-color: #FFCE76;
-  }
-  
-  .progress-ratio {
-    font-size: 0.9rem;
-    white-space: normal;
-    color: #333;
-    margin-right: 5%;
-    text-align: right;
-  }
+width: 100%;
+margin: 20px 0;
+padding: 20px;
+}
+
+.task-name {
+font-family: scale-variable, sans-serif;
+font-variation-settings: "wdth" 100, "wght" 500;
+font-size: 2rem;
+margin-bottom: 10px;
+color: #3D3D3D;
+}
+
+.project-name {
+font-family: scale-variable, sans-serif;
+font-variation-settings: "wdth" 100, "wght" 400;
+font-size: 1.5rem;
+text-decoration: none;
+margin-bottom: 20px;
+color: #3D3D3D;
+}
+
+.description {
+font-family: new-science, sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 1rem;
+line-height: 1.6;
+color: #3D3D3D;
+margin-bottom: 20px;
+margin-right: 5%;
+}
+
+.task-details {
+font-family: new-science, sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 1rem;
+color: #3D3D3D;
+}
+
+.progress-bar-container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: 10px;
+}
+
+.progress-bar {
+flex: 1;
+height: 20px;
+background-color: #ddd;
+border-radius: 5px;
+overflow: hidden;
+margin-right: 1%;
+}
+
+.progress {
+height: 100%;
+background-color: #FFCE76;
+}
+
+.progress-ratio {
+font-size: 0.9rem;
+white-space: normal;
+color: #333;
+margin-right: 5%;
+text-align: right;
+}

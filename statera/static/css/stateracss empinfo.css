@@ -5,9 +5,67 @@ body {
     background-color: #EAEAE8;
     overflow-x: hidden;
 }
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    z-index: 10;
+    background-color: #3D3D3D; /* Semi-transparent background for header */
+    border-radius: 10px;
+}
+
+.background{
+    background-color: #EAEAE8;
+}
 
 .header-container {
+    position: sticky;
     margin-bottom: 20px;
+  }
+
+
+
+/* Navigation styles */
+.nav {
+    display: flex;
+    align-items: flex-end; /* Align navigation links at the bottom */
+}
+
+.nav-logo {
+    display: block; 
+    height: 35px;
+    width: 35px;
+    padding-left: 5%;
+    padding-bottom: 12%;
+  }
+
+.nav-link {
+    font-family: scale-variable, sans-serif;
+    font-variation-settings: "wdth" 100, "wght" 400;
+    text-decoration: none; /* Remove underline */
+    font-size: 30px !important; /* Adjust font size */
+    color: #ffffff; /* Adjust link color */
+    padding: 18px 15px;
+    padding-left: 5px;
+}
+
+.nav-link:hover {
+    color: #dcdcdc; /* Add hover effect */
+}
+
+/* Logo styles */
+.logo {
+    width: 320px; /* Adjust logo size */
+    height: 50px; /* Keep logo proportional */
+    position: absolute;
+    left: 38%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center bottom; /* Align logo with text bottom */
 }
 
 h2 {
