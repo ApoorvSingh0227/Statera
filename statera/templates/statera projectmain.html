@@ -14,17 +14,17 @@
 
           <section class="overview">
               <div class="project-name">{{ project_name }}</div>
-              <div class="manager-name"><strong>Manager:</strong> Manager Name</div>
+              <div class="manager-name"><strong>Manager:</strong> {{ manager_name }}</div>
               <p class="description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                {{ description }}
               </p>
               <div class="task-details">
-                  <p><strong>Due Date:</strong> 12 Dec 2024</p>
+                  <p><strong>Due Date: </strong>{{ due_date }}</p>
                   <div class="progress-bar-container">
                       <div class="progress-bar">
-                          <div class="progress" style="width: 30.25%;"></div>
+                          <div class="progress" style="width: {{ progress|floatformat:0 }};"></div>
                       </div>
-                      <span class="progress-ratio">36/119 hrs</span>
+                      <span class="progress-ratio">{{actual_hours|floatformat:0}}/{{estimated_hours|floatformat:0}} hrs</span>
                   </div>
               </div>
           </section>
@@ -33,54 +33,58 @@
           <section class="task-list">
               <h2>Tasks</h2>
               <div class="scrollable-tasks">
+                  {% for task in tasks %}
                   <div class="task-item">
-                      <div class="task-number">1</div>
-                      <div class="task-name">Rough Sketches</div>
+                      <div class="task-number">{{ task.0 }}</div>
+                      <div class="task-name">
+                        <a style="text-decoration: none; color: inherit;" href="{% url 'task_info' task.0 %}">{{ task.1 }}</a>
+                      </div>
                   </div>
-                  <div class="task-item">
-                      <div class="task-number">2</div>
-                      <div class="task-name">Audience Research</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">3</div>
-                    <div class="task-name">Logo Design</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">4</div>
-                    <div class="task-name">Poster Design</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">5</div>
-                    <div class="task-name">Promotional Product Design</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">6</div>
-                    <div class="task-name">Billboard Design</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">7</div>
-                    <div class="task-name">Advertising Planning</div>
-                  </div>
-                  <div class="task-item">
-                    <div class="task-number">8</div>
-                    <div class="task-name">Documentation</div>
-                  </div>
-                  <!-- Repeat  -->
+                  {% empty %}
+                  <p class="task-name">No tasks available in this project</p>
+                  {% endfor %}
+
               </div>
           </section>
       </div>
 
-      <!-- Employee -->
       <section class="participants-list">
           <h2>Participants</h2>
-          <div class="participant-item">
-              <div class="participant-name">Participant Name</div>
-              <div class="participant-task-number">Task No.</div>
-              <div class="participant-task-name">Task Name</div>
-              <div class="participant-progress">Progress</div>
-              <div class="participant-deadline">Deadline</div>
+          <div class="participant-header">
+              <div><strong>Participant Name</strong></div>
+              <div><strong>Task ID</strong></div>
+              <div><strong>Task Name</strong></div>
+              <div><strong>Progress</strong></div>
+              <div><strong>Deadline</strong></div>
           </div>
-          <!-- Repeat -->
+
+          <div class="participant-item">
+            {% for participant in participants %}
+            <div>{{ participant.0 }}</div>
+            <div>{{ participant.5 }}</div>
+            <div>{{ participant.1 }}</div>
+            <div>
+                <div class="progress-bar">
+                    <div class="progress" 
+                                style="width:{{ participant.6|floatformat:0 }}%; 
+                                {% if participant.6 <= 25 %}
+                                    background-color: #F48787;
+                                {% elif participant.6 > 25 and participant.6 <= 75 %}
+                                    background-color: #FFCE76;
+                                {% elif participant.6 > 75 and participant.6 < 100 %}
+                                    background-color: #e0ff76;
+                                {% else %}
+                                    background-color: #2dc77d;
+                                {% endif %}">
+                            </div>
+                </div>
+                <div class="progress-ratio">{{ participant.3|floatformat:0}}/{{ participant.4|floatformat:0}} hrs</div>
+            </div>
+            <div>{{ participant.2 }}</div>
+          {% empty %}
+          <p>No participants for this project.</p>
+          {% endfor %}
+          </div>
       </section>
   </body>
 </div>
@@ -93,7 +97,6 @@ function adjustTaskListHeight() {
     const overview = document.querySelector(".overview");
     const taskList = document.querySelector(".task-list");
 
-    // Set the height of task-list equal to the height of the overview
     taskList.style.height = `${overview.offsetHeight}px`;
 }
 </script>

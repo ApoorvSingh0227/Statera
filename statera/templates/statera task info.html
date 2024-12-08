@@ -14,16 +14,15 @@
         <div class="task-name">{{ task_name }}</div>
         <a class="project-name" href="{% url 'project_main' project_id %}">{{ project_name }}</a>
         <p class="description">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+          {{description}}
         </p>
         <div class="task-details">
-          <p><strong>Due Date:</strong> 12 Dec 2024</p>
+          <p><strong>Due Date: </strong>{{due_date}}</p>
           <div class="progress-bar-container">
             <div class="progress-bar">
-              <div class="progress" style="width: 68.75%;"></div>
+              <div class="progress" style="width: {{ progress|floatformat:0 }};"></div>
             </div>
-            <br>
-            <span class="progress-ratio">11/16 hrs</span>
+            <span class="progress-ratio">{{actual_hours|floatformat:0}}/{{estimated_hours|floatformat:0}} hrs</span>
           </div>
         </div>
       </div>

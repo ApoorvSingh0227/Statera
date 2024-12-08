@@ -134,14 +134,103 @@ def project_main(request, project_id):
         return redirect('login')
     
     try:
+        # Fetch project details (name, manager, description, due date, progress)
         with connection.cursor() as cursor:
-            cursor.execute("SELECT projectName FROM Project WHERE projectID = %s", [project_id])
+            cursor.execute(
+                """
+                SELECT 
+                    p.projectName,
+                    CONCAT(e.firstName, ' ', e.lastName) AS managerName,
+                    p.description,
+                    MAX(t.dueDate) AS dueDate,
+                    SUM(t.actualHours) AS actualHours,
+                    SUM(t.estimatedHours) AS estimatedHours
+                FROM Project p
+                LEFT JOIN Employee e ON p.projectManagerID = e.employeeID
+                LEFT JOIN Task t ON t.projectID = p.projectID
+                WHERE p.projectID = %s
+                GROUP BY p.projectID, e.firstName, e.lastName, p.description
+                """,
+                [project_id]
+            )
             project = cursor.fetchone()
-            project_name = project[0] if project else "Project not found"
+
+        if project:
+            project_name = project[0]
+            manager_name = project[1] if project[1] else "Unassigned"
+            description = project[2] if project[2] else "No description provided."
+            due_date = project[3] if project[3] else "N/A"
+            actual_hours = project[4] or 0
+            estimated_hours = project[5] or 0
+            progress = (actual_hours / estimated_hours) * 100 if estimated_hours else 0
+        else:
+            project_name = "Project not found"
+            manager_name = "-"
+            description = "-"
+            due_date = "-"
+            progress = 0
+
+        # Fetch task list for the project
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT 
+                    t.taskID, t.taskName
+                FROM Task t
+                WHERE t.projectID = %s
+                """,
+                [project_id]
+            )
+            tasks = cursor.fetchall()
+
+        # Fetch participant list
+        with connection.cursor() as cursor:
+            cursor.execute(
+                """
+                SELECT 
+                    CONCAT(e.firstName, ' ', e.lastName) AS participantName,
+                    t.taskName,
+                    t.dueDate,
+                    SUM(t.actualHours) AS actualHours,
+                    t.estimatedHours,
+                    t.taskID
+                FROM Task t
+                JOIN Employee e ON t.assignedTo = e.employeeID
+                WHERE t.projectID = %s
+                GROUP BY e.employeeID, t.taskName, t.dueDate, t.estimatedHours, t.taskID
+                """,
+                [project_id]
+            )
+            participants = cursor.fetchall()
+
+        processed_participants = []
+        for participant in participants:
+            actual = participant[3] or 0
+            estimated = participant[4] or 1  # Avoid division by zero
+            progress = (actual / estimated) * 100 if estimated else 0
+            processed_participants.append((*participant, progress))
+        participants = processed_participants
+
     except Exception as e:
         project_name = "Error fetching project details"
+        manager_name = "-"
+        description = "-"
+        due_date = "-"
+        progress = 0
+        tasks = []
+        participants = []
 
-    return render(request, 'statera projectmain.html', {'project_name': project_name})
+    return render(request, 'statera projectmain.html', {
+        'project_name': project_name,
+        'manager_name': manager_name,
+        'description': description,
+        'due_date': due_date,
+        'progress': progress,
+        'tasks': tasks,
+        'participants': participants,
+        'actual_hours':actual_hours,
+        'estimated_hours':estimated_hours
+        })
 
 def task_info(request, task_id):
     if 'employee_id' not in request.session:
@@ -151,24 +240,55 @@ def task_info(request, task_id):
         with connection.cursor() as cursor:
             cursor.execute(
                 """
-                SELECT t.taskName, p.projectName, p.projectID
+                SELECT 
+                    t.taskName, 
+                    p.projectName, 
+                    p.projectID, 
+                    t.description, 
+                    t.dueDate, 
+                    t.actualHours, 
+                    t.estimatedHours
                 FROM Task t
                 JOIN Project p ON t.projectID = p.projectID
                 WHERE t.taskID = %s
                 """,
-                  [task_id])
+                [task_id]
+            )
             task = cursor.fetchone()
+            
             if task:
-                task_name = task[0]  # First column: taskName
-                project_name = task[1]  # Second column: projectName
-                project_id = task[2]  # Project ID
+                task_name = task[0]
+                project_name = task[1]
+                project_id = task[2]
+                description = task[3] if task[3] else "No description provided."
+                due_date = task[4] if task[4] else "N/A"
+                actual_hours = task[5] or 0
+                estimated_hours = task[6] or 1 
+                progress = (actual_hours / estimated_hours) * 100 if estimated_hours else 0
             else:
                 task_name = "-"
                 project_name = "-"
                 project_id = None
+                description = "-"
+                due_date = "-"
+                progress = 0
+
     except Exception as e:
         task_name = "Error fetching task details"
         project_name = "Error fetching project details"
         project_id = None
+        description = "-"
+        due_date = "-"
+        progress = 0
 
-    return render(request, 'statera task info.html', {'task_id': task_id, 'task_name':task_name, 'project_name': project_name ,'project_id': project_id})
+    return render(request, 'statera task info.html', {
+        'task_id': task_id,
+        'task_name': task_name,
+        'project_name': project_name,
+        'project_id': project_id,
+        'description': description,
+        'due_date': due_date,
+        'progress': progress,
+        'actual_hours': actual_hours,
+        'estimated_hours': estimated_hours,
+        })

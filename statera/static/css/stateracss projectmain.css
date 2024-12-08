@@ -200,8 +200,19 @@ body {
     margin-bottom: 10px;
 }
 
-.participant-item {
+.participant-header {
+    display: grid;
+    grid-template-columns: 1fr 0.5fr 1fr 2fr 1fr; /* Adjust column proportions */
+    gap: 10px;
     font-weight: 600;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-bottom: 2px solid #ccc;
+}
+
+.participant-item {
+    font-family: new-science, sans-serif;
+    font-weight: 400;
     display: grid;
     grid-template-columns: 1fr 0.5fr 1fr 2fr 1fr;
     gap: 10px;
